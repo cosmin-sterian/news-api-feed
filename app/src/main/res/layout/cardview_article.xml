@@ -10,8 +10,10 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_article"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         app:cardCornerRadius="4dp"
         app:contentPadding="10dp">
 
