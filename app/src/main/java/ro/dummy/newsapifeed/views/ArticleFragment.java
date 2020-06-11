@@ -72,7 +72,7 @@ public class ArticleFragment extends Fragment {
 		List<Article> result = new LinkedList<>();
 		for (int i = 0; i < 10; i++) {
 			result.add(Article.builder()
-					.id(i)
+					.url(Integer.toString(i))
 					.title(String.format("Article #%d", i))
 					.description(String.format("Description #%d", i))
 					.author(String.format("Author #%d", i))

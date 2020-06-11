@@ -11,6 +11,10 @@ public class ArticleViewModel extends ViewModel {
 		this.article = article;
 	}
 
+	public ArticleViewModel(int articleId) {
+
+	}
+
 	public String getTitle() {
 		return article.getTitle();
 	}
@@ -36,5 +40,10 @@ public class ArticleViewModel extends ViewModel {
 	 * TODO: Data should be retrieved here (not in the fragment)
 	 *  and eventually returned by the index of the RecyclerView
 	 *  which should be set in the VM's constructor
+	 */
+
+	/*
+	 * TODO: If reusing this ViewModel for both the RecyclerView
+	 *  and the CardView, consider Factory Pattern
 	 */
 }
