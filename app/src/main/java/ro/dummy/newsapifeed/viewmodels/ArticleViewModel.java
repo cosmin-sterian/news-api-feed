@@ -2,7 +2,7 @@ package ro.dummy.newsapifeed.viewmodels;
 
 import androidx.lifecycle.ViewModel;
 
-import ro.dummy.newsapifeed.data.Article;
+import ro.dummy.newsapifeed.data.local.Article;
 
 public class ArticleViewModel extends ViewModel {
 	private final Article article;

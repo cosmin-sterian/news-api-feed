@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.LinkedList;
 import java.util.List;
 
-import ro.dummy.newsapifeed.data.Article;
+import ro.dummy.newsapifeed.data.local.Article;
 import ro.dummy.newsapifeed.databinding.FragmentArticleListBinding;
 
 /**

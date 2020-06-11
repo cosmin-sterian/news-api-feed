@@ -1,4 +1,4 @@
-package ro.dummy.newsapifeed.data;
+package ro.dummy.newsapifeed.data.local;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

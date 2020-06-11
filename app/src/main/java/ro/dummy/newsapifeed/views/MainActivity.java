@@ -2,7 +2,6 @@ package ro.dummy.newsapifeed.views;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -11,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ro.dummy.newsapifeed.R;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,19 +28,16 @@ public class MainActivity extends AppCompatActivity {
 
 		bottomNavigationView = findViewById(R.id.bottom_navigation_view);
 		bottomNavigationView.setItemIconTintList(null);
-//		bottomNavView.getMenu().findItem(R.id.menu_item_top_headlines).setIcon(R.mipmap.ic_top_headlines);
 
 		bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 			@Override
 			public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 				switch (item.getItemId()) {
 					case R.id.menu_item_top_headlines:
-						Log.d("sda", "top_headlines_pressed");
-//						item.setIcon(R.drawable.ic_burning_newspaper_compressed_checked);
+						Timber.d("Top headlines pressed");
 						return true;
 					case R.id.menu_item_all_news:
-						Log.d("sda", "all_news_pressed");
-//						deselectTopHeadlines();
+						Timber.d("All news pressed");
 						return true;
 					default:
 						return true;
@@ -48,18 +45,4 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 	}
-
-//	private void deselectTopHeadlines() {
-//		bottomNavigationView
-//				.getMenu()
-//				.findItem(R.id.menu_item_top_headlines)
-//				.setIcon(R.drawable.ic_top_headers);
-//	}
-//
-//	private void selectTopHeadlines() {
-//		MenuItem item = bottomNavigationView
-//				.getMenu()
-//				.findItem(R.id.menu_item_top_headlines)
-//				.setIcon(R.drawable.ic_burning_newspaper_compressed_checked);
-//	}
 }

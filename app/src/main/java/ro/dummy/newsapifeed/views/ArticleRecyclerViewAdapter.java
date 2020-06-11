@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ro.dummy.newsapifeed.data.Article;
+import ro.dummy.newsapifeed.data.local.Article;
 import ro.dummy.newsapifeed.databinding.CardviewArticleBinding;
 import ro.dummy.newsapifeed.viewmodels.ArticleViewModel;
 
