@@ -39,11 +39,11 @@ public class NewsApiConsumerService {
 		articlesLiveData = new MutableLiveData<>(Collections.emptyList());
 	}
 
-	public LiveData<List<Article>> getArticles() {
+	public LiveData<List<Article>> getArticlesListLiveData() {
 		return articlesLiveData;
 	}
 
-	public void fetchArticles(NewsQuery query, NewsType newsType) {
+	public LiveData<List<Article>> getArticles(NewsQuery query, NewsType newsType) {
 		switch (newsType) {
 			case TOP_HEADLINES:
 				collectResultFromArticlesResponse(
@@ -60,6 +60,7 @@ public class NewsApiConsumerService {
 			default:
 				throw new IllegalStateException("NewsType value not recognized");
 		}
+		return articlesLiveData;
 	}
 
 	private void collectResultFromArticlesResponse(Single<ArticlesResponse> articlesResponseSingle) {
@@ -77,8 +78,12 @@ public class NewsApiConsumerService {
 							Timber.w("Failed to retrieve articles");
 							// TODO: Set a status LiveData to indicate error so UI shows toast
 						}
-				)
-				.dispose();
+				);
+		/*
+		 * TODO: Figure out when should it be disposed,
+		 *  because it can't be disposed here (sort of a race condition)
+		 */
+//				.dispose();
 	}
 
 	private static List<Article> articleDtoListToArticleList(List<ArticleDto> articleDtos) {
@@ -107,7 +112,7 @@ public class NewsApiConsumerService {
 		}
 	}
 
-	public static enum NewsType {
+	public enum NewsType {
 		TOP_HEADLINES, EVERYTHING
 	}
 

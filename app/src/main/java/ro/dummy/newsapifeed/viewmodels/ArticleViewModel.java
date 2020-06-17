@@ -1,18 +1,15 @@
 package ro.dummy.newsapifeed.viewmodels;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
 import ro.dummy.newsapifeed.data.local.Article;
 
 public class ArticleViewModel extends ViewModel {
-	private final Article article;
+	private Article article;
 
 	public ArticleViewModel(Article article) {
 		this.article = article;
-	}
-
-	public ArticleViewModel(int articleId) {
-
 	}
 
 	public String getTitle() {
@@ -31,6 +28,7 @@ public class ArticleViewModel extends ViewModel {
 		return article.getCategory();
 	}
 
+	@NonNull
 	@Override
 	public String toString() {
 		return article.toString();
