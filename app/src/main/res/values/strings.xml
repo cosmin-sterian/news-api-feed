@@ -2,4 +2,9 @@
     <string name="app_name">News API Feed</string>
     <string name="menu_item_top_headlines">Top headlines</string>
     <string name="menu_item_all_news">All news</string>
+    <string name="article_title_hint">Article title</string>
+    <string name="article_author_hint">Article author</string>
+    <string name="article_description_hint">Article description</string>
+    <string name="article_category_hint">Article category</string>
+    <string name="article_source_name_hint">Article source name</string>
 </resources>

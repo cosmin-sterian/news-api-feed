@@ -11,13 +11,8 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
-public class Article {
+public class ArticleSource {
 	@EqualsAndHashCode.Include
-	private final String url;
-	private final String title;
-	private final String description;
-	private final String author;
-	private final String category;
-	private final String publishedAt;
-	private final ArticleSource source;
+	private final String id;
+	private final String name;
 }

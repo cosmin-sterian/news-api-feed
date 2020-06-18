@@ -3,6 +3,10 @@ package ro.dummy.newsapifeed.viewmodels;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 import ro.dummy.newsapifeed.data.local.Article;
 
 public class ArticleViewModel extends ViewModel {
@@ -21,11 +25,32 @@ public class ArticleViewModel extends ViewModel {
 	}
 
 	public String getAuthor() {
-		return article.getAuthor();
+		String author = article.getAuthor();
+		if (author == null || author.length() == 0) {
+			author = "Unknown author";
+		}
+		return "by " + author;
+	}
+
+	public String getSourceName() {
+		return article.getSource().getName();
 	}
 
 	public String getCategory() {
 		return article.getCategory();
+	}
+
+	public String getPublishedAt() {
+		final String publishedAt = article.getPublishedAt();
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT, FormatStyle.SHORT);
+		final String dateTimeWithoutTimezone = publishedAt.substring(0, publishedAt.indexOf('Z'));
+		final LocalDateTime localDateTime = LocalDateTime.parse(dateTimeWithoutTimezone);
+		return localDateTime.format(dateTimeFormatter);
+		/*
+		 * TODO: Take a look at LocalDateTime.until,
+		 *  maybe I could compute "x mins/hrs/days ago"
+		 */
 	}
 
 	@NonNull
