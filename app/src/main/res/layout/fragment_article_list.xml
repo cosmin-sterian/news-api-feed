@@ -4,15 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".views.ArticleFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:name="ro.dummy.newsapifeed.feed.views.ArticleFragment"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/cardview_article">
+        android:layout_height="match_parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:name="ro.dummy.newsapifeed.feed.views.ArticleFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            app:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/cardview_article">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>
