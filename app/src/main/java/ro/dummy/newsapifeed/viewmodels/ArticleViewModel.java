@@ -53,6 +53,14 @@ public class ArticleViewModel extends ViewModel {
 		 */
 	}
 
+	public String getContent() {
+		return article.getContent();
+	}
+
+	public Article getArticle() {
+		return article;
+	}
+
 	@NonNull
 	@Override
 	public String toString() {

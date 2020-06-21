@@ -1,18 +1,17 @@
 package ro.dummy.newsapifeed.views;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import ro.dummy.newsapifeed.BaseActivity;
 import ro.dummy.newsapifeed.R;
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
 	private BottomNavigationView bottomNavigationView;
 
@@ -20,11 +19,6 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-			getWindow().setNavigationBarDividerColor(getResources().getColor(R.color.colorPrimary, getTheme()));
-			getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent, getTheme()));
-		}
 
 		bottomNavigationView = findViewById(R.id.bottom_navigation_view);
 		bottomNavigationView.setItemIconTintList(null);

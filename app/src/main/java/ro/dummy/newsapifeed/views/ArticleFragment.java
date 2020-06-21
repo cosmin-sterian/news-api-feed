@@ -89,7 +89,6 @@ public class ArticleFragment extends Fragment {
 
 	@Override
 	public void onDestroyView() {
-		super.onDestroyView();
 		// Clean-up the binding references in order to prevent memory leaks
 		binding.unbind();
 		binding = null;
@@ -97,6 +96,7 @@ public class ArticleFragment extends Fragment {
 		recyclerView = null;
 		adapter = null;
 		// TODO: Check if must remove observer, but I don't think so
+		super.onDestroyView();
 	}
 
 	@SuppressLint("DefaultLocale")

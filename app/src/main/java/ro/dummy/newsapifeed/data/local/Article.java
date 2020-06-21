@@ -1,5 +1,7 @@
 package ro.dummy.newsapifeed.data.local;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -11,7 +13,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
-public class Article {
+public class Article implements Serializable {
 	@EqualsAndHashCode.Include
 	private final String url;
 	private final String title;
@@ -19,5 +21,6 @@ public class Article {
 	private final String author;
 	private final String category;
 	private final String publishedAt;
+	private final String content;
 	private final ArticleSource source;
 }

@@ -1,7 +1,9 @@
 package ro.dummy.newsapifeed.views;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +11,8 @@ import ro.dummy.newsapifeed.data.local.Article;
 import ro.dummy.newsapifeed.databinding.CardviewArticleBinding;
 import ro.dummy.newsapifeed.viewmodels.ArticleViewModel;
 import ro.dummy.newsapifeed.viewmodels.ArticlesListViewModel;
+import ro.dummy.newsapifeed.views.articledetails.ArticleDetailsActivity;
+import timber.log.Timber;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Article}.
@@ -53,6 +57,20 @@ public class ArticleRecyclerViewAdapter extends RecyclerView.Adapter<ArticleRecy
 		public ViewHolder(CardviewArticleBinding cardviewArticleBinding) {
 			super(cardviewArticleBinding.getRoot());
 			this.cardviewArticleBinding = cardviewArticleBinding;
+
+			// Add click listener
+			cardviewArticleBinding.getRoot().setOnClickListener(view -> {
+				ArticleViewModel articleViewModel = cardviewArticleBinding.getArticleViewModel();
+				if (articleViewModel == null || articleViewModel.getArticle() == null) {
+					Timber.w("RecyclerView Article VM not initialised");
+					Toast.makeText(view.getContext(), "Article not initialised", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				Article article = articleViewModel.getArticle();
+				Intent intent = new Intent(view.getContext(), ArticleDetailsActivity.class);
+				intent.putExtra(ArticleDetailsActivity.ARTICLE_KEY, article);
+				view.getContext().startActivity(intent);
+			});
 		}
 
 		@Override
