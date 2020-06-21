@@ -8,4 +8,6 @@
     <string name="article_category_hint">Article category</string>
     <string name="article_source_name_hint">Article source name</string>
     <string name="article_image_hint">Article image</string>
+    <string name="article_details_url_read_more">Read more</string>
+    <string name="transition_article_card">transition_article_card</string>
 </resources>

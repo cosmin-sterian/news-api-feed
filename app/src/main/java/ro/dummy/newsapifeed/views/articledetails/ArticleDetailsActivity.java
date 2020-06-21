@@ -1,8 +1,14 @@
 package ro.dummy.newsapifeed.views.articledetails;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.transition.TransitionInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.squareup.picasso.Picasso;
 
 import ro.dummy.newsapifeed.BaseActivity;
+import ro.dummy.newsapifeed.R;
 import ro.dummy.newsapifeed.data.local.Article;
 import ro.dummy.newsapifeed.data.local.ArticleSource;
 import ro.dummy.newsapifeed.databinding.ActivityArticleDetailsBinding;
@@ -35,6 +42,8 @@ public class ArticleDetailsActivity extends BaseActivity {
 
 		initActionBar();
 		loadImage();
+		binding.buttonReadMore.setOnClickListener(this::readMoreOnClickListener);
+		setUpTransitions();
 	}
 
 	@Override
@@ -81,5 +90,25 @@ public class ArticleDetailsActivity extends BaseActivity {
 		Picasso.get()
 				.load(article.getUrlToImage())
 				.into(binding.ivDetailsImage);
+	}
+
+	private void readMoreOnClickListener(View view) {
+		final Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(article.getUrl()));
+		final PackageManager packageManager = getPackageManager();
+		if (webIntent.resolveActivity(packageManager) != null) {
+			startActivity(webIntent);
+		} else {
+			Timber.d("No app can handle the intent action");
+			Toast.makeText(this, "Url can't be opened, are there any web browsers installed?", Toast.LENGTH_LONG).show();
+		}
+	}
+
+	private void setUpTransitions() {
+		final Window window = getWindow();
+//		window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+//		window.setSharedElementEnterTransition(new Fade());
+//		window.setSharedElementEnterTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.move));
+		window.setSharedElementEnterTransition(TransitionInflater.from(this).inflateTransition(R.transition.transition_article_card));
+		window.setAllowEnterTransitionOverlap(true);
 	}
 }

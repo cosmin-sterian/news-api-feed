@@ -1,9 +1,8 @@
 package ro.dummy.newsapifeed.views;
 
 import android.os.Bundle;
-import android.view.MenuItem;
-
-import androidx.annotation.NonNull;
+import android.transition.Fade;
+import android.view.Window;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -23,20 +22,25 @@ public class MainActivity extends BaseActivity {
 		bottomNavigationView = findViewById(R.id.bottom_navigation_view);
 		bottomNavigationView.setItemIconTintList(null);
 
-		bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-			@Override
-			public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-				switch (item.getItemId()) {
-					case R.id.menu_item_top_headlines:
-						Timber.d("Top headlines pressed");
-						return true;
-					case R.id.menu_item_all_news:
-						Timber.d("All news pressed");
-						return true;
-					default:
-						return true;
-				}
+		bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+			switch (item.getItemId()) {
+				case R.id.menu_item_top_headlines:
+					Timber.d("Top headlines pressed");
+					return true;
+				case R.id.menu_item_all_news:
+					Timber.d("All news pressed");
+					return true;
+				default:
+					return true;
 			}
 		});
+		setUpTransitions();
+	}
+
+	private void setUpTransitions() {
+		final Window window = getWindow();
+//		window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+		window.setSharedElementExitTransition(new Fade());
+//		window.setAllowReturnTransitionOverlap(true);
 	}
 }
