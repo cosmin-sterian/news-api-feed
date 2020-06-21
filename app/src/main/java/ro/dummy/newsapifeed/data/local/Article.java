@@ -22,5 +22,6 @@ public class Article implements Serializable {
 	private final String category;
 	private final String publishedAt;
 	private final String content;
+	private final String urlToImage;
 	private final ArticleSource source;
 }

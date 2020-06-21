@@ -7,4 +7,5 @@
     <string name="article_description_hint">Article description</string>
     <string name="article_category_hint">Article category</string>
     <string name="article_source_name_hint">Article source name</string>
+    <string name="article_image_hint">Article image</string>
 </resources>

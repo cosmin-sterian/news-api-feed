@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity {
@@ -14,6 +15,13 @@ public class BaseActivity extends AppCompatActivity {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 			getWindow().setNavigationBarDividerColor(getResources().getColor(R.color.colorPrimary, getTheme()));
 			getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent, getTheme()));
+		}
+	}
+
+	protected void initActionBar() {
+		final ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
 		}
 	}
 }

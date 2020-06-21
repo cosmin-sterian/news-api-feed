@@ -15,6 +15,7 @@ public class ArticleDto {
 	public final String url;
 	public final String publishedAt;
 	public final String content;
+	public final String urlToImage;
 	public final ArticleSourceDto source;
 
 	@AllArgsConstructor
@@ -30,7 +31,7 @@ public class ArticleDto {
 	public Article toDomainArticle() {
 		// TODO: Update category
 		return new Article(url, title, description, author,
-				null, publishedAt, content,
+				null, publishedAt, content, urlToImage,
 				source.toDomainArticleSource());
 	}
 }

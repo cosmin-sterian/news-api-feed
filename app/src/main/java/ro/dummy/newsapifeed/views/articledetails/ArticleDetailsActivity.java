@@ -6,8 +6,9 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.squareup.picasso.Picasso;
 
 import ro.dummy.newsapifeed.BaseActivity;
 import ro.dummy.newsapifeed.data.local.Article;
@@ -32,10 +33,8 @@ public class ArticleDetailsActivity extends BaseActivity {
 				new ViewModelProvider(this, new ArticleViewModelFactory(article))
 						.get(ArticleViewModel.class));
 
-		final ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setDisplayHomeAsUpEnabled(true);
-		}
+		initActionBar();
+		loadImage();
 	}
 
 	@Override
@@ -62,7 +61,8 @@ public class ArticleDetailsActivity extends BaseActivity {
 		}
 		Timber.w("No article provided by intent or saved instance state, building dummy article");
 		article = new Article("dummy", "dummy", "dummy",
-				"dummy", "dummy", "dummy", "dummy",
+				"dummy", "dummy", "dummy",
+				"dummy", null,
 				new ArticleSource("dummy", "dummy"));
 	}
 
@@ -75,5 +75,11 @@ public class ArticleDetailsActivity extends BaseActivity {
 			default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	private void loadImage() {
+		Picasso.get()
+				.load(article.getUrlToImage())
+				.into(binding.ivDetailsImage);
 	}
 }
