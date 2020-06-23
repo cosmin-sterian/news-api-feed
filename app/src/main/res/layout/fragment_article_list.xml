@@ -2,23 +2,66 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".views.ArticleFragment">
+    tools:context=".views.NewsFeedFragment">
+
+    <data>
+        <variable
+            name="newsFeedViewModel"
+            type="ro.dummy.newsapifeed.viewmodels.NewsFeedViewModel" />
+    </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:name="ro.dummy.newsapifeed.feed.views.ArticleFragment"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="@dimen/card_padding"
-            android:paddingRight="@dimen/card_padding"
-            app:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/cardview_article">
+            android:orientation="vertical">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/card_padding"
+                android:layout_marginRight="@dimen/card_padding"
+                android:orientation="horizontal"
+                android:visibility="@{newsFeedViewModel.searchBarVisibility}">
+
+                <EditText
+                    android:id="@+id/edittext_query_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/search_news"
+                    android:text="@={newsFeedViewModel.searchInput}"
+                    app:error="@{newsFeedViewModel.searchInputError}"
+                    android:onTextChanged="@{newsFeedViewModel::onSearchInputChanged}"
+                    android:importantForAutofill="no"
+                    android:inputType="textShortMessage" />
+
+                <Button
+                    android:id="@+id/button_search_everything"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/search"
+                    android:onClick="@{newsFeedViewModel::onClickSearch}" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/card_padding"
+                android:layout_marginRight="@dimen/card_padding"
+                app:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/cardview_article">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

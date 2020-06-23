@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.transition.TransitionInflater;
+import android.transition.AutoTransition;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -17,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.squareup.picasso.Picasso;
 
 import ro.dummy.newsapifeed.BaseActivity;
-import ro.dummy.newsapifeed.R;
 import ro.dummy.newsapifeed.data.local.Article;
 import ro.dummy.newsapifeed.data.local.ArticleSource;
 import ro.dummy.newsapifeed.databinding.ActivityArticleDetailsBinding;
@@ -108,7 +107,8 @@ public class ArticleDetailsActivity extends BaseActivity {
 //		window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
 //		window.setSharedElementEnterTransition(new Fade());
 //		window.setSharedElementEnterTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.move));
-		window.setSharedElementEnterTransition(TransitionInflater.from(this).inflateTransition(R.transition.transition_article_card));
+//		window.setSharedElementEnterTransition(TransitionInflater.from(this).inflateTransition(R.transition.transition_article_card));
+		window.setSharedElementEnterTransition(new AutoTransition());
 		window.setAllowEnterTransitionOverlap(true);
 	}
 }

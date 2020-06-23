@@ -1,10 +1,13 @@
 package ro.dummy.newsapifeed.views;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,49 +20,63 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.util.LinkedList;
 import java.util.List;
 
+import ro.dummy.newsapifeed.R;
 import ro.dummy.newsapifeed.data.local.Article;
+import ro.dummy.newsapifeed.data.remote.NewsApiConsumerService.NewsType;
 import ro.dummy.newsapifeed.databinding.FragmentArticleListBinding;
-import ro.dummy.newsapifeed.viewmodels.ArticlesListViewModel;
+import ro.dummy.newsapifeed.viewmodels.NewsFeedViewModel;
+import ro.dummy.newsapifeed.viewmodels.NewsFeedViewModelFactory;
 import timber.log.Timber;
 
 /**
  * A fragment representing a list of Articles.
  */
-public class ArticleFragment extends Fragment {
+public class NewsFeedFragment extends Fragment {
 
+	public static final String NEWS_TYPE_KEY = "news-type";
 	private FragmentArticleListBinding binding;
 	private SwipeRefreshLayout swipeRefreshLayout;
 	private RecyclerView recyclerView;
 	private RecyclerView.Adapter<ArticleRecyclerViewAdapter.ViewHolder> adapter;
-//	private RecyclerView.LayoutManager layoutManager;
+	private NewsType newsType;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
 	 */
-	public ArticleFragment() {
+	public NewsFeedFragment() {
 	}
 
-	@SuppressWarnings("unused")
-	public static ArticleFragment newInstance() {
-		return new ArticleFragment();
+	public static NewsFeedFragment newInstance(NewsType newsType) {
+		NewsFeedFragment newsFeedFragment = new NewsFeedFragment();
+		Bundle bundle = new Bundle(1);
+		bundle.putSerializable(NEWS_TYPE_KEY, newsType);
+		newsFeedFragment.setArguments(bundle);
+		return newsFeedFragment;
 	}
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 							 @Nullable Bundle savedInstanceState) {
+		newsType = getArguments() != null
+				? (NewsType) getArguments().getSerializable(NEWS_TYPE_KEY)
+				: NewsType.TOP_HEADLINES;
+
 		// Do View Binding for easier access to the RecyclerView, at least for practice
 		binding = FragmentArticleListBinding.inflate(inflater, container, false);
 		swipeRefreshLayout = binding.swipeRefreshLayout;
 		recyclerView = binding.recyclerView;
 
 		// Create ViewModel for the RecyclerView and its items
-		final ArticlesListViewModel articlesListViewModel = new ViewModelProvider(this).get(ArticlesListViewModel.class);
-		adapter = new ArticleRecyclerViewAdapter(articlesListViewModel);
+		final NewsFeedViewModel newsFeedViewModel = new ViewModelProvider(this, new NewsFeedViewModelFactory(newsType))
+				.get(NewsFeedViewModel.class);
+		binding.setLifecycleOwner(this);
+		binding.setNewsFeedViewModel(newsFeedViewModel);
+		adapter = new ArticleRecyclerViewAdapter(newsFeedViewModel);
 		recyclerView.setAdapter(adapter);
 
 		// Notify the adapter when data is renewed
-		articlesListViewModel
+		newsFeedViewModel
 				.getArticlesListLiveData()
 				.observe(getViewLifecycleOwner(),
 						(Observer<List<Article>>) articles -> {
@@ -76,8 +93,26 @@ public class ArticleFragment extends Fragment {
 		 */
 		swipeRefreshLayout.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) () -> {
 			Timber.d("Swiped to refresh, updating articles");
-			articlesListViewModel.updateArticles();
+			newsFeedViewModel.updateArticles();
 		});
+
+		/*
+		 * Set onTouchListener if showing search bar
+		 * in order to unfocus the EditText when tapping outside
+		 */
+		if (newsType == NewsType.EVERYTHING) {
+			binding.getRoot().setOnTouchListener((view, motionEvent) -> {
+				if (view.getId() != R.id.edittext_query_text) {
+					EditText searchEditText = view.findViewById(R.id.edittext_query_text);
+					hideSoftKeyboard();
+					searchEditText.clearFocus();
+				}
+				view.performClick();
+				return true;
+			});
+		}
+
+		newsFeedViewModel.updateArticles();
 		return binding.getRoot();
 	}
 
@@ -112,5 +147,21 @@ public class ArticleFragment extends Fragment {
 					.build());
 		}
 		return result;
+	}
+
+	private void hideSoftKeyboard() {
+		final Activity activity = getActivity();
+		if (activity == null || activity.getCurrentFocus() == null) {
+			Timber.d("activity is null or nothing focused");
+			return;
+		}
+		InputMethodManager inputMethodManager =
+				(InputMethodManager) activity
+						.getSystemService(Activity.INPUT_METHOD_SERVICE);
+		if (inputMethodManager == null) {
+			Timber.d("no InputMethodManager found");
+			return;
+		}
+		inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
 	}
 }

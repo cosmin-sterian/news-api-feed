@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import ro.dummy.newsapifeed.data.local.Article;
 import ro.dummy.newsapifeed.databinding.CardviewArticleBinding;
 import ro.dummy.newsapifeed.viewmodels.ArticleViewModel;
-import ro.dummy.newsapifeed.viewmodels.ArticlesListViewModel;
+import ro.dummy.newsapifeed.viewmodels.NewsFeedViewModel;
 import ro.dummy.newsapifeed.views.articledetails.ArticleDetailsActivity;
 import timber.log.Timber;
 
@@ -23,14 +23,14 @@ import timber.log.Timber;
  */
 public class ArticleRecyclerViewAdapter extends RecyclerView.Adapter<ArticleRecyclerViewAdapter.ViewHolder> {
 //	private final List<Article> articleList;
-	private final ArticlesListViewModel articlesListViewModel;
+	private final NewsFeedViewModel newsFeedViewModel;
 
 //	public ArticleRecyclerViewAdapter(List<Article> articleList) {
 //		this.articleList = articleList;
 //	}
 
-	public ArticleRecyclerViewAdapter(ArticlesListViewModel articlesListViewModel) {
-		this.articlesListViewModel = articlesListViewModel;
+	public ArticleRecyclerViewAdapter(NewsFeedViewModel newsFeedViewModel) {
+		this.newsFeedViewModel = newsFeedViewModel;
 	}
 
 	@Override
@@ -44,13 +44,13 @@ public class ArticleRecyclerViewAdapter extends RecyclerView.Adapter<ArticleRecy
 
 	@Override
 	public void onBindViewHolder(final ViewHolder holder, int position) {
-		Article article = articlesListViewModel.getArticles().get(position);
+		Article article = newsFeedViewModel.getArticles().get(position);
 		holder.cardviewArticleBinding.setArticleViewModel(new ArticleViewModel(article));
 	}
 
 	@Override
 	public int getItemCount() {
-		return articlesListViewModel.getArticles().size();
+		return newsFeedViewModel.getArticles().size();
 	}
 
 	public class ViewHolder extends RecyclerView.ViewHolder {
