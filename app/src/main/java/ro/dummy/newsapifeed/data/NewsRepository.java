@@ -22,10 +22,6 @@ public class NewsRepository {
 		return newsApiConsumerService.getArticlesListLiveData();
 	}
 
-//	public LiveData<List<Article>> getArticles(TopHeadlinesQuery topHeadlinesQuery, NewsApiConsumerService.NewsType newsType) {
-//		return newsApiConsumerService.getArticles(topHeadlinesQuery, newsType);
-//	}
-
 	public LiveData<List<Article>> getTopHeadlines(TopHeadlinesQuery topHeadlinesQuery) {
 		return newsApiConsumerService.getTopHeadlines(topHeadlinesQuery);
 	}
@@ -33,13 +29,6 @@ public class NewsRepository {
 	public LiveData<List<Article>> getEverything(EverythingQuery everythingQuery) {
 		return newsApiConsumerService.getEverything(everythingQuery);
 	}
-
-//	public LiveData<List<Article>> getTopHeadlines() {
-//		final NewsQuery newsQuery = NewsQuery.builder()
-//				.category("technology")
-//				.build();
-//		return newsApiConsumerService.getArticles(newsQuery, NewsApiConsumerService.NewsType.TOP_HEADLINES);
-//	}
 
 	public static synchronized NewsRepository getInstance() {
 		if (instance == null) {

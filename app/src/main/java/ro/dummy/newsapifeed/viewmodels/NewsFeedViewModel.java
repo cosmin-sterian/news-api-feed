@@ -50,16 +50,6 @@ public class NewsFeedViewModel extends ViewModel {
 		return articlesListLiveData;
 	}
 
-//	public void updateArticles(NewsType newsType) {
-////		articlesListLiveData = newsRepository.getArticles();
-////		articlesListLiveData = newsRepository.getTopHeadlines();
-//		TopHeadlinesQuery topHeadlinesQuery = TopHeadlinesQuery.builder()
-//				.category("technology")
-//				.build();
-//		Timber.d("Fetching %s", newsType.name());
-//		articlesListLiveData = newsRepository.getArticles(topHeadlinesQuery, newsType);
-//	}
-
 	public void onSearchInputChanged(CharSequence sequence, int start, int before, int count) {
 		if (count == 0 && searchInputError.getValue() == null) {
 			searchInputError.setValue(SEARCH_INPUT_ERROR);

@@ -22,12 +22,8 @@ import timber.log.Timber;
  * {@link RecyclerView.Adapter} that can display a {@link Article}.
  */
 public class ArticleRecyclerViewAdapter extends RecyclerView.Adapter<ArticleRecyclerViewAdapter.ViewHolder> {
-//	private final List<Article> articleList;
 	private final NewsFeedViewModel newsFeedViewModel;
 
-//	public ArticleRecyclerViewAdapter(List<Article> articleList) {
-//		this.articleList = articleList;
-//	}
 
 	public ArticleRecyclerViewAdapter(NewsFeedViewModel newsFeedViewModel) {
 		this.newsFeedViewModel = newsFeedViewModel;

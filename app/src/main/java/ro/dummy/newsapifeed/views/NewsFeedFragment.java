@@ -116,12 +116,6 @@ public class NewsFeedFragment extends Fragment {
 		return binding.getRoot();
 	}
 
-//	@Override
-//	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//		super.onViewCreated(view, savedInstanceState);
-//		articleViewModel = new ViewModelProvider(requireActivity()).get(ArticleViewModel.class);
-//	}
-
 	@Override
 	public void onDestroyView() {
 		// Clean-up the binding references in order to prevent memory leaks
