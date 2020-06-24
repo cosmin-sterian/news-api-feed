@@ -20,36 +20,46 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/card_padding"
-                android:layout_marginRight="@dimen/card_padding"
-                android:orientation="horizontal"
-                android:visibility="@{newsFeedViewModel.searchBarVisibility}">
+                android:elevation="8dp">
 
-                <EditText
-                    android:id="@+id/edittext_query_text"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="@string/search_news"
-                    android:text="@={newsFeedViewModel.searchInput}"
-                    app:error="@{newsFeedViewModel.searchInputError}"
-                    android:onTextChanged="@{newsFeedViewModel::onSearchInputChanged}"
-                    android:importantForAutofill="no"
-                    android:inputType="textShortMessage" />
+                    android:layout_marginLeft="@dimen/card_padding"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="@dimen/card_padding"
+                    android:layout_marginBottom="8dp"
+                    android:elevation="8dp"
+                    android:orientation="horizontal"
+                    android:visibility="@{newsFeedViewModel.searchBarVisibility}">
 
-                <Button
-                    android:id="@+id/button_search_everything"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/search"
-                    android:onClick="@{newsFeedViewModel::onClickSearch}" />
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/edittext_query_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="@string/search_news"
+                        android:importantForAutofill="no"
+                        android:inputType="textShortMessage"
+                        android:onTextChanged="@{newsFeedViewModel::onSearchInputChanged}"
+                        android:text="@={newsFeedViewModel.searchInput}"
+                        app:error="@{newsFeedViewModel.searchInputError}" />
+
+                    <Button
+                        android:id="@+id/button_search_everything"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{newsFeedViewModel::onClickSearch}"
+                        android:text="@string/search" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
