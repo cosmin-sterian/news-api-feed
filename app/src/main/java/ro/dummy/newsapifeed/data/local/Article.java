@@ -1,5 +1,9 @@
 package ro.dummy.newsapifeed.data.local;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
@@ -13,8 +17,11 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
+@Entity
 public class Article implements Serializable {
 	@EqualsAndHashCode.Include
+	@PrimaryKey
+	@NonNull
 	private final String url;
 	private final String title;
 	private final String description;
