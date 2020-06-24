@@ -53,20 +53,17 @@ public class ArticleViewModel extends ViewModel {
 		 */
 	}
 
+	public String getContent() {
+		return article.getContent();
+	}
+
+	public Article getArticle() {
+		return article;
+	}
+
 	@NonNull
 	@Override
 	public String toString() {
 		return article.toString();
 	}
-
-	/*
-	 * TODO: Data should be retrieved here (not in the fragment)
-	 *  and eventually returned by the index of the RecyclerView
-	 *  which should be set in the VM's constructor
-	 */
-
-	/*
-	 * TODO: If reusing this ViewModel for both the RecyclerView
-	 *  and the CardView, consider Factory Pattern
-	 */
 }

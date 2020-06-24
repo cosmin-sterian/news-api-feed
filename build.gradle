@@ -10,6 +10,7 @@ buildscript {
         lombokVersion = '1.18.12'
         retrofitVersion = '2.9.0'
         reactivex = [rxJava: '3.0.4', rxAndroid: '3.0.0', androidReactiveStreams: '1.1.1']
+        okHttpVersion = '4.7.2'
     }
 
     repositories {
