@@ -30,7 +30,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
                     <ImageView
                         android:id="@+id/iv_details_image"
@@ -48,6 +49,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical"
                     android:padding="@dimen/text_margin">
 
@@ -55,6 +57,7 @@
                         android:id="@+id/tv_details_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:ellipsize="end"
                         android:hint="@string/article_title_hint"
                         android:maxLines="3"
@@ -66,6 +69,7 @@
                         android:id="@+id/tv_details_author"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:ellipsize="end"
                         android:hint="@string/article_author_hint"
                         android:maxLines="1"
@@ -80,6 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/text_margin"
                         android:layout_marginBottom="@dimen/text_margin"
+                        android:layout_weight="1"
                         android:hint="@string/article_description_hint"
                         android:text="@{articleViewModel.content}"
                         android:textSize="14sp"
@@ -88,7 +93,8 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/details_constraintlayout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
 
                         <TextView
                             android:id="@+id/tv_details_source_name"
@@ -118,6 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
                     android:text="@string/article_details_url_read_more" />
 
             </LinearLayout>
